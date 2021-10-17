@@ -12,29 +12,56 @@ var schema = buildSchema(`
         contacto: String
         carrera: String
         }
+
+    type Proyecto{
+        id: Int
+        nombreProyecto: String
+        objetivoEspecifico: String
+        objetivoGeneral: String
+        presupuesto : Int
+        fechaInicial: String
+        fechaFinal: String
+        director: String
+        estado: String
+        avance: String
+        }
     
     type Query{
         estudiantes: [Estudiante]
         estudiante(id: Int) : Estudiante
+        proyectos: [Proyecto]
+        proyecto(id: Int):Proyecto
         }
 
     type Mutation {
         addEstudiante(nombre: String, apellido: String,
             edad : Int, contacto: String, carrera: String):Estudiante
+        addProyecto(
+            nombreProyecto: String,
+            objetivoEspecifico: String,
+            objetivoGeneral: String,
+            presupuesto : Int,
+            fechaInicial: String,
+            fechaFinal: String,
+            director: String,
+            estado: String,
+            avance: String):Proyecto
     
         }
-
-
-
+     
+    
 `);
 //modify Estudiante, RemoveEstudiante
 
 var estudiantes=[];
+var proyectos =[];
 var counter=1;
+var counterp=1;
 //funcion para resolver las peticiones
 
 var root = {
     estudiantes: () => {return estudiantes; },
+    proyectos : () => {return proyectos;},
 
     estudiante : (data) => {
         for (var i=0; i<estudiantes.length; i++)
@@ -42,6 +69,14 @@ var root = {
                     return estudiantes[i];
         return null;
         },
+    proyecto : (data) =>{
+        for (var i=0;i< proyectos.length; i++)
+            if (proyectos[i].id== data.id)
+                return proyectos[i];
+        return null;
+
+        },
+
     addEstudiante: (data) => {
         var e={'id':counter, 'nombre':data.nombre,'apellido':data.apellido,
                 'edad':data.edad,'contacto':data.contacto,'carrera':
@@ -49,6 +84,17 @@ var root = {
         estudiantes.push ( e );
         counter++;
         return e;
+        },
+    addProyecto: (data) => {
+        var p={'id':counterp, 'nombreProyecto':data.nombreProyecto,
+                'objetivoEspecifico':data.objetivoEspecifico,
+                'objetivoGeneral': data.objetivoGeneral,
+                'presupuesto':data.presupuesto,'fechaInicial':data.fechaInicial,
+                'fechaFinal':data.fechaFinal,'director':data.director,
+                'estado':data.estado,'avance':data.avance};
+        proyectos.push ( p );
+        counterp++;
+        return p;
         },
 
 };

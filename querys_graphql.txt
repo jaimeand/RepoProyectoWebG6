@@ -1,0 +1,66 @@
+{
+  estudiantes{
+    id
+    nombre
+    apellido
+    edad
+    contacto
+    carrera
+  }
+}
+
+
+_________________________
+
+{
+  proyecto{
+    id
+    nombreProyecto
+    objetivoEspecifico
+    objetivoGeneral
+    presupuesto
+    fechaInicial
+    fechaFinal
+    director
+    estado
+    avance
+    
+  }
+}
+
+
+______________________________
+
+mutation{
+  addProyecto(
+    nombreProyecto:"clasificación de materiales sinteticos",
+    objetivoEspecifico:"separar materiales sinteticos en mina",
+    objetivoGeneral:"crear metodo para separar materiales en mina",
+    presupuesto: 50000000,
+    fechaInicial: "17 noviembre 2021",
+    fechaFinal: "23 enero 2022",
+    director: "Pepe Sanchez",
+    estado: "1",
+    avance:"etapa 1 de ejecución,  reunion con clientes"
+    
+  ){
+    id
+    nombreProyecto
+    objetivoEspecifico
+    objetivoGeneral
+    presupuesto
+    fechaInicial
+    fechaFinal
+    director
+    estado
+    avance
+    
+  }
+}
+
+
+
+________________________________
+
+
+
